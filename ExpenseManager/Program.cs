@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
 
 //DB
 
-builder.Services.AddDbContext<SalaryDbContext>(options =>
+builder.Services.AddDbContext<ExpenseManagerDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });

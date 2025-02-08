@@ -39,9 +39,9 @@ namespace ExpenseManager.Controllers
         //    }
         //};
 
-        private readonly SalaryDbContext _context;
+        private readonly ExpenseManagerDbContext _context;
 
-        public SalaryController(SalaryDbContext context)
+        public SalaryController(ExpenseManagerDbContext context)
         {
             _context = context;
         }
@@ -59,10 +59,10 @@ namespace ExpenseManager.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<SalaryModel>> GetSalaryById(int id)
+        public async Task<ActionResult<Salary>> GetSalaryById(int id)
         {
             var salaryDetails = await _context.Salaries.FindAsync(id);
-            if(salaryDetails == null)
+            if (salaryDetails == null)
             {
                 return NotFound("Salary Not Found");
             }
@@ -71,15 +71,15 @@ namespace ExpenseManager.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<SalaryModel>> AddSalary(SalaryModel newSalary)
+        public async Task<ActionResult<Salary>> AddSalary(Salary newSalary)
         {
-            if (newSalary is null) 
-            { 
-                return BadRequest("Error in Data"); 
+            if (newSalary is null)
+            {
+                return BadRequest("Error in Data");
             }
             _context.Salaries.Add(newSalary);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetSalaryById), new { id = newSalary.Salary_Id}, newSalary);
+            return CreatedAtAction(nameof(GetSalaryById), new { id = newSalary.SalaryId }, newSalary);
         }
 
         //[HttpPut("{id}")]
