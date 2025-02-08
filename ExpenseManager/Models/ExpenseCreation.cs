@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ExpenseManager.Models;
 
@@ -15,5 +16,8 @@ public partial class ExpenseCreation
 
     public int? SalaryId { get; set; }
 
+    public int ExpenseAmount { get; set; }
+
+    [JsonIgnore]
     public virtual Salary? Salary { get; set; }
 }
